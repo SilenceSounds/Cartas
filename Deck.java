@@ -1,6 +1,8 @@
 package cartas;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
+
 /**
  *
  * @author Sayad
@@ -20,6 +22,69 @@ public class Deck {
                 
             }
         }        
+    }
+    
+    public void showMenu(Deck NewDeck) throws Exception{
+        
+        Scanner scanner = new Scanner(System.in);
+        boolean End = false; 
+        
+        do{
+            System.out.println("Bienvenido a Poker!");
+            System.out.println("1 Mezclar deck");
+            System.out.println("2 Sacar una carta");
+            System.out.println("3 Carta al azar");
+            System.out.println("4 Generar una mano de 5 cartas");
+            System.out.println("0 Salir \n");
+            
+            System.out.println("Opcion Elegida: ");
+            
+            int E = scanner.nextInt();
+            
+            System.out.println();
+            
+            switch (E){
+                case 1:
+                    this.Shuffle();
+                    break;
+                    
+                case 2:
+                    this.Head();
+                    if (Deck.isEmpty()){
+                        throw new Exception("El deck se ha quedado sin cartas");
+                    }
+                    break;
+                    
+                case 3:
+                    this.Pick();
+                        if (Deck.isEmpty()){
+                        throw new Exception("El deck se ha quedado sin cartas");
+                    }
+                    break;
+                    
+                case 4:
+                    if (Deck.size() < 5){
+                        throw new Exception("No hay suficiente cartas");
+                    }
+                    this.Hand();
+                        if (Deck.isEmpty()){
+                        throw new Exception("El deck se ha quedado sin cartas");
+                    }
+                    break;
+                    
+                case 0:
+                    End = true;
+                    break;
+                
+                default:
+                    throw new Exception("Opcion no valida");
+                    
+            }
+            
+            System.out.println("\n");
+
+        }while(End != true);
+         
     }
     
     public void Shuffle(){
